@@ -1,0 +1,33 @@
+.data
+welcome:  .asciiz  "\nEnter Number: "
+odd:      .asciiz  "Number is Odd!\n"        
+even:     .asciiz  "Number is Even!\n"
+
+
+.text
+Main:
+la $a0, welcome   #Print welcome message
+li $v0, 4
+syscall
+
+
+li $v0 5
+syscall
+move $t0, $v0     #$t0 == input
+
+andi $t0, 1
+beqz $t0, Even
+
+la $a0, odd       #Print odd
+li $v0, 4
+syscall
+j Main
+
+
+Even:
+la $a0, even      #Print even
+li $v0, 4
+syscall
+j Main
+
+
