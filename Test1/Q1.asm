@@ -1,7 +1,7 @@
 .data
    A: .half 0xBEED, 0xFEED, 0X3E00, 0X0DCA, 0x0007, 0x0012, 0x8000, 0x1234 , 0x5678, 0x9999
    terminate: .asciiz "Done!"
-   newline: .asciiz "\n"
+   newline: .byte 0x0A
    
 .text
   la $s0 A
