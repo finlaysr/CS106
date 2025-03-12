@@ -4,14 +4,14 @@
 
 .text
 la $s0 matrix
-li $a1 0  #counter from 31 -> 0
+li $a1 0  #counter from 0 -> 31
 
 Main:
   beq $a1 32 End
   
-  lw $a0 ($s0)
-  j extract
-  extractReturn:
+  lw $a0 ($s0) #0 = current value
+  jal Extract
+  jal Reverse
   
   #print binary number
   li $v0 35
@@ -22,15 +22,27 @@ Main:
   la $a0 newline
   syscall
   
-  addi $s0 $s0 4
-  addi $a1 $a1 1
+  addi $s0 $s0 4 #next matrix line
+  addi $a1 $a1 1 #counter ++
+  
   j Main
   
   
 .include "Q4a.asm"
 
+
 Reverse:
+  #use $s2 -
+  li $s2 0
+  beqz $a0 ReverseReturn
+  
+  
+  li $s3 0x80000000
+  srlv $a0 $s3 $a1
+  
+  ReverseReturn:
+    jr $ra
   
 
-
 End:
+

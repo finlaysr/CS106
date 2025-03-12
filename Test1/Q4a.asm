@@ -6,7 +6,7 @@
 #lw $a0 word
 #li $a1 4
 
-extract:
+Extract:
   bgt $a1 31 Error
   blt $a1 0  Error
   
@@ -14,11 +14,8 @@ extract:
   sllv $t7 $t7 $a1
   and $a0 $a0 $t7
   
-  j Return 
+  jr $ra 
   
 Error:
   break 
 
-Return:
-  
-  j extractReturn
